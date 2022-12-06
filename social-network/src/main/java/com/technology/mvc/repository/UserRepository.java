@@ -8,15 +8,8 @@ import java.util.Optional;
 public interface UserRepository {
   void addUser(String name, String password);
 
-  boolean validate(String name, String password);
-
-  List<User> findUsers();
-
   Optional<User> getUser(String name);
-
-  List<User> filterUsersByName(String parameter);
-
-  Optional<Long> getUserIdByName(String name);
+  Optional<User> getUserById(Long signedInUserId);
 
   List<User> getSuggestedFriendsList(Long signedInUserId);
 

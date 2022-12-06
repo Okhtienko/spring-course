@@ -1,6 +1,6 @@
 package com.technology.mvc.service;
 
-import com.technology.mvc.hashing.HashingPasswordRepository;
+import com.technology.mvc.hashing.BcryptHashingPassword;
 import com.technology.mvc.model.User;
 import com.technology.mvc.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,29 +12,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
   private final UserRepository userRepository;
-  private final HashingPasswordRepository hashingPasswordRepository;
+  private final BcryptHashingPassword hashingPassword;
 
   public void addUser(String name, String password) {
-    if (userRepository.getUser(name).isPresent()) {
-      throw new RuntimeException("User already exists");
-    }
-    userRepository.addUser(name, hashingPasswordRepository.generateHash(password));
+    userRepository.addUser(name, hashingPassword.generateHash(password));
   }
 
   public boolean validate(String name, String password) {
     final User user = userRepository.getUser(name).orElse(null);
-    if (user != null) {
-      return hashingPasswordRepository.verifyHash(password, user.getPassword());
-    }
-    return false;
+    return hashingPassword.verifyHash(password, user.getPassword());
   }
 
-  public List<User> filterUsersByName(String parameter) {
-    return userRepository.filterUsersByName(parameter);
+  public User getUser(String name) {
+    return userRepository.getUser(name).orElse(null);
   }
 
-  public Long getUserId(String name) {
-    return userRepository.getUserIdByName(name).orElse(null);
+  public User getUserById(Long signedInUserId) {
+    return userRepository.getUserById(signedInUserId).orElse(null);
   }
 
   public List<User> getSuggestedFriendsList(Long signedInUserId) {

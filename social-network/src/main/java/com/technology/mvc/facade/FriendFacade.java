@@ -3,6 +3,7 @@ package com.technology.mvc.facade;
 import com.technology.mvc.model.User;
 import com.technology.mvc.service.FriendRequestsService;
 import com.technology.mvc.service.FriendService;
+import com.technology.mvc.service.MessengerService;
 import com.technology.mvc.service.UserService;
 import com.technology.mvc.session.SignedInUser;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ public class FriendFacade {
   private final UserService userService;
   private final SignedInUser signedInUser;
 
+  private final MessengerService messengerService;
+
   public void createFriend(final Long recipientId) {
     final Long senderId = signedInUser.getId();
     friendService.addFriend(senderId, recipientId);
@@ -29,7 +32,7 @@ public class FriendFacade {
     log.info("Delete friend request. RecipientId[{}]", recipientId);
   }
 
-  public List<User> renderFriendPage() {
+  public List<User> showFriends() {
     final Long signedInUserId = signedInUser.getId();
     final List<User> friends = userService.getFriendsList(signedInUserId);
     log.info("Displays a number of friends. Number of friends[{}]", friends.size());
@@ -40,9 +43,12 @@ public class FriendFacade {
     final Long signedInUserId = signedInUser.getId();
     friendService.deleteFriend(signedInUserId, recipientId);
     log.info("Delete friend. FriendId[{}]", recipientId);
+
+    messengerService.deleteMessages(signedInUserId, recipientId);
+    log.info("Delete messages. FriendId[{}]", recipientId);
   }
 
-  public List<User> renderSuggestedFriendsPage() {
+  public List<User> showSuggestedFriends() {
     final Long signedInUserId = signedInUser.getId();
     final List<User> suggestedFriends = userService.getSuggestedFriendsList(signedInUserId);
     log.info("Displays a number of suggested friends. Number of suggested friends[{}]",

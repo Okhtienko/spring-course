@@ -22,14 +22,14 @@ public class AuthenticationController {
 
   @PostMapping(path = "/signUp", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public String signUp(@Valid final UserDto userDto) {
-    return authorizationFacade.signUp(userDto)
+    return authorizationFacade.createUser(userDto)
         ? "welcome"
         : "redirect:signUp";
   }
 
   @PostMapping(path = "/signIn", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public String signIn(@Valid final UserDto userDto) {
-    return authorizationFacade.signIn(userDto)
+    return authorizationFacade.checkUserVerification(userDto)
         ? "redirect:suggestedFriends"
         : "redirect:signUp";
   }

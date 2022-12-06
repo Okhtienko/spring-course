@@ -14,26 +14,22 @@ public class AuthenticationFacade {
   private final UserService userService;
   private final SignedInUser signedInUser;
 
-  public boolean signUp(UserDto userDto) {
+  public boolean createUser(final UserDto userDto) {
     final String name = userDto.getName();
     final String password = userDto.getPassword();
 
-    if (!(name.isEmpty() && password.isEmpty())) {
-      userService.addUser(name, password);
-      log.info("User does not exist, registering a new user. User[{}]", name);
-      return true;
-    } else {
-      log.info("Form fields are empty.");
-      return false;
-    }
+    userService.addUser(name, password);
+    log.info("User does not exist, registering a new user. User[{}]", name);
+
+    return true;
   }
 
-  public boolean signIn(UserDto userDto) {
+  public boolean checkUserVerification(final UserDto userDto) {
     final String name = userDto.getName();
     final String password = userDto.getPassword();
 
     if (userService.validate(name, password)) {
-      final Long signedInUserId = userService.getUserId(name);
+      final Long signedInUserId = userService.getUser(name).getId();
       signedInUser.setId(signedInUserId);
       signedInUser.setName(userDto.getName());
       log.info("User logged in successfully. User[{}]", name);

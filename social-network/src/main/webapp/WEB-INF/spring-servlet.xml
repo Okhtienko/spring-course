@@ -28,6 +28,7 @@
             <mvc:mapping path="/outgoingRequests"/>
             <mvc:mapping path="/incomingRequests"/>
             <mvc:mapping path="/suggestedFriends"/>
+            <mvc:mapping path="/messenger"/>
             <bean id="loggerInterceptors" class="com.technology.mvc.interceptor.AuthorizationInterceptor">
                 <constructor-arg index="0" ref="signedInUser"/>
             </bean>

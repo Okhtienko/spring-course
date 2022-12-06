@@ -41,14 +41,14 @@ public class FriendRequestFacade {
     log.info("Delete friend request. RecipientId[{}]", recipientId);
   }
 
-  public List<User> renderOutgoingRequestsPage() {
+  public List<User> showOutgoingRequests() {
     final Long senderId = signedInUser.getId();
     final List<User> outgoingRequestsList = userService.getAllOutgoingRequestList(senderId);
     log.info("Displays a number of requests in friends. Number of requests[{}]", outgoingRequestsList.size());
     return  outgoingRequestsList;
   }
 
-  public List<User> renderIncomingRequestsPage() {
+  public List<User> showIncomingRequests() {
     final Long recipientId = signedInUser.getId();
     final List<User> incomingRequestsList = userService.getAllIncomingRequestList(recipientId);
     log.info(

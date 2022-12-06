@@ -20,6 +20,3 @@
         </div>
     </div>
 </nav>
-<div>
-    <c:out value="${signedUserName}"/>
-</div>

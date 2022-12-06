@@ -20,10 +20,7 @@ import java.util.Optional;
 @Slf4j
 public class JdbcUserRepository implements UserRepository {
   private static final String CREATE_USER = "INSERT INTO users(name, password) VALUES (?, ?)";
-  private static final String FIND_USERS = "SELECT * FROM users";
-  private static final String VALIDATE_USER = "SELECT * FROM users WHERE name=? AND password=?";
   private static final String GET_USER_BY_NAME = "SELECT * FROM users WHERE name=?";
-  private static final String GET_ID_USER_BY_NAME = "SELECT id FROM users WHERE name=?";
   private static final String GET_SUGGESTED_FRIENDS = "SELECT * FROM users WHERE id !=? " +
       "AND id NOT IN (SELECT second_friend_id FROM friends WHERE first_friend_id=?)";
   private static final String GET_ALL_OUTGOING_REQUESTS =
@@ -48,39 +45,6 @@ public class JdbcUserRepository implements UserRepository {
   }
 
   @Override
-  public boolean validate(String name, String password) {
-    try (PreparedStatement statement = connection.prepareStatement(VALIDATE_USER)) {
-      statement.setString(1, name);
-      statement.setString(2, password);
-      ResultSet resultSet = statement.executeQuery();
-
-      return resultSet.next();
-
-    } catch (SQLException e) {
-      log.error("Validation error. Name[{}], password[{}]. SQL exception{}", name, password, e);
-    }
-    return false;
-  }
-
-  @Override
-  public List<User> findUsers() {
-    try (Statement statement = connection.createStatement()) {
-      ResultSet resultSet = statement.executeQuery(FIND_USERS);
-      final List<User> users = new ArrayList<>();
-
-      while (resultSet.next()) {
-        users.add(buildUser(resultSet));
-      }
-
-      return users;
-
-    } catch (SQLException e) {
-      log.error("SQL exception.", e);
-    }
-    return new ArrayList<>();
-  }
-
-  @Override
   public Optional<User> getUser(String name) {
     try (PreparedStatement statement = connection.prepareStatement(GET_USER_BY_NAME)) {
       statement.setString(1, name);
@@ -97,23 +61,17 @@ public class JdbcUserRepository implements UserRepository {
   }
 
   @Override
-  public List<User> filterUsersByName(String parameter) {
-    final List<User> users = findUsers();
-    return users.stream().filter(user -> user.getName().startsWith(parameter)).toList();
-  }
-
-  @Override
-  public Optional<Long> getUserIdByName(String name) {
-    try (PreparedStatement statement = connection.prepareStatement(GET_ID_USER_BY_NAME)) {
-      statement.setString(1, name);
+  public Optional<User> getUserById(Long signedInUserId) {
+    try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id=?")) {
+      statement.setLong(1, signedInUserId);
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next()) {
-        return Optional.of(resultSet.getLong("id"));
+        return Optional.of(buildUser(resultSet));
       }
 
     } catch (SQLException e) {
-      log.error("User ID not received. Name[{}]. SQL exception{}", name, e);
+      log.error("No user data received. signedInUserId[{}]. SQL exception{}", signedInUserId, e);
     }
     return Optional.empty();
   }

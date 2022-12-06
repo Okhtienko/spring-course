@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.14/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styleTables.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/tables.css"/>">
     <title>Incoming Requests</title>
 </head>
 <body>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.14/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styleTables.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/tables.css"/>">
     <title>Friends</title>
 </head>
 <body>
@@ -38,6 +38,7 @@
                             <th style="min-width:150px;">Name</th>
                             <th style="min-width:150px;">Status</th>
                             <th style="min-width:150px;"></th>
+                            <th style="min-width:150px;"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -55,6 +56,13 @@
                                 <td>
                                     <form action="friends?requestFriendId=${friend.getId()}" method="post">
                                         <button class="mode mode_off">Delete friend</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="messenger" method="get">
+                                        <input type="hidden" name="friendId" value="${friend.id}">
+                                        <input type="hidden" name="friendName" value="${friend.name}">
+                                        <button class="mode mode_on">Send message</button>
                                     </form>
                                 </td>
                             </tr>

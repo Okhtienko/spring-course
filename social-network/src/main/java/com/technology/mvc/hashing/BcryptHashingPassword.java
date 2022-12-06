@@ -1,6 +1,6 @@
 package com.technology.mvc.hashing;
 
-public interface HashingPasswordRepository {
+public interface BcryptHashingPassword {
   String generateHash(String password);
   boolean verifyHash(String password, String hash);
 }

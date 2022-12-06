@@ -14,11 +14,11 @@ import java.util.List;
 @RequestMapping("/suggestedFriends")
 public class SuggestedFriendsController {
 
-  private FriendFacade friendFacade;
+  private final FriendFacade friendFacade;
 
   @GetMapping()
   public String renderSuggestedFriendsPage(final Model model) {
-    final List<User> suggestedFriends = friendFacade.renderSuggestedFriendsPage();
+    final List<User> suggestedFriends = friendFacade.showSuggestedFriends();
     model.addAttribute("suggestedFriends", suggestedFriends);
     return "suggestedFriends";
   }

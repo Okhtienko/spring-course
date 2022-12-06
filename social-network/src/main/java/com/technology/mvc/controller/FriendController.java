@@ -18,20 +18,20 @@ public class FriendController {
   private final FriendFacade friendFacade;
 
   @GetMapping(path = "/friends")
-  public String renderFriendsPage(final Model model) {
-    final List<User> friends = friendFacade.renderFriendPage();
+  public String showFriends(final Model model) {
+    final List<User> friends = friendFacade.showFriends();
     model.addAttribute("friends", friends);
     return "friends";
   }
 
   @PostMapping(path = "/acceptingRequests",  consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String createFriend(@RequestParam Long requestFriendId) {
+  public String createFriend(@RequestParam final Long requestFriendId) {
     friendFacade.createFriend(requestFriendId);
     return "redirect:incomingRequests";
   }
 
   @PostMapping(path = "/friends",  consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String deleteFriend(@RequestParam Long requestFriendId) {
+  public String deleteFriend(@RequestParam final Long requestFriendId) {
     friendFacade.deleteFriend(requestFriendId);
     return "friends";
   }

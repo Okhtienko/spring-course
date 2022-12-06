@@ -41,7 +41,7 @@ public class JdbcFriendRepository implements FriendRepository {
       statement.executeUpdate();
     } catch (SQLException e) {
       log.error(
-          "Record not removed from db. SignedInUserId[{}], friendId[{}].  SQL exception{}",
+          "Record not deleted  from db. SignedInUserId[{}], friendId[{}].  SQL exception{}",
           signedInUserId,  friendId, e
       );
     }
