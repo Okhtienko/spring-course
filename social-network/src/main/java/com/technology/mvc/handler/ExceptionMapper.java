@@ -1,5 +1,6 @@
 package com.technology.mvc.handler;
 
+import com.technology.mvc.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindException;

@@ -31,24 +31,21 @@ public class MessengerController {
     model.addAttribute("friendId", friendId);
 
     final User friend = userService.getUserById(friendId);
-    model.addAttribute("friendName", friend.getName());
-    model.addAttribute("signedUserName", signedInUser.getName());
+    model.addAttribute("friend", friend);
+    model.addAttribute("signedInUser", signedInUser);
+
     return "messenger";
   }
 
   @PostMapping(path = "/messages",  consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String sendMessage(final MessageDto messageDto, @RequestParam final Long friendId,
-                            @RequestParam final String friendName, final Model model) {
+  public String sendMessage(final MessageDto messageDto, @RequestParam final Long friendId) {
     messageFacade.saveMessage(messageDto, friendId);
-    model.addAttribute("friendId", friendId);
-    model.addAttribute("friendName", friendName);
-    return "redirect:messenger";
+    return "redirect:messenger?friendId=" + friendId;
   }
 
   @PostMapping(path = "/clear")
-  public String clearHistoryMessages(@RequestParam final Long friendId, final Model model) {
+  public String clearHistoryMessages(@RequestParam final Long friendId) {
     messageFacade.deleteMessages(friendId);
-    model.addAttribute("friendId", friendId);
-    return "redirect:messenger";
+    return "redirect:messenger?friendId=" + friendId;
   }
 }

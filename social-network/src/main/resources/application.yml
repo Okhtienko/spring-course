@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:35432/social_network
+
+logRounds: 12
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

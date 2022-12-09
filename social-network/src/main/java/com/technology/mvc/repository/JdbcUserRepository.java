@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +29,8 @@ public class JdbcUserRepository implements UserRepository {
   private static final String GET_ALL_FRIENDS =
       "SELECT * FROM users u JOIN friends f on u.id = f.second_friend_id WHERE f.first_friend_id=? " +
           "UNION SELECT * FROM users u JOIN friends f on u.id = f.first_friend_id WHERE f.second_friend_id=?";
-  private static final String IS_EXISTS = "SELECT * FROM user WHERE name=?";
+  private static final String IS_EXISTS = "SELECT  * FROM users WHERE name=?";
+
   private final Connection connection;
 
   @Override

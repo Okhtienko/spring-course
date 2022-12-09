@@ -10,8 +10,8 @@ import javax.validation.ConstraintValidatorContext;
 public class NameConstraintValidator implements ConstraintValidator<NameConstraint, String> {
   private final UserService userService;
 
-  @Override
+ @Override
   public boolean isValid(String nameField, ConstraintValidatorContext constraintValidatorContext) {
-    return !userService.isExists(nameField);
+    return userService.isExists(nameField);
   }
 }
