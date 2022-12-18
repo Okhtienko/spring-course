@@ -1,0 +1,37 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    background: #f9f9f9;
+}
+
+.p-30 {
+    padding:30px;
+}
+
+.mb-0 {
+    color: #000;
+}
+
+.mode {
+    padding:4px 10px;
+    line-height: 30px;
+    font-size: 14px;
+    color:#ffffff;
+    font-weight: 400;
+    border-width: 0;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    font-size:11px;
+    letter-spacing: 0.4px;
+}
+
+.mode_off {
+    margin-top: 5px;
+    background-color: #eb3133;
+}
+
+.mode_on {
+    background-color: #09cc3c;
+}
