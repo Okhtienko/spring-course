@@ -17,4 +17,5 @@ public class SessionConfig {
   public SignedInUser signedInUser() {
     return new SignedInUser();
   }
+
 }

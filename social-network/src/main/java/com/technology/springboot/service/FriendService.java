@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FriendService {
+
   private final FriendRepository friendRepository;
 
   public void addFriend(final Long senderId, final Long recipientId) {
@@ -27,4 +28,5 @@ public class FriendService {
   public List<User> getFriends(final Long signedInUserId) {
     return friendRepository.getFriends(signedInUserId);
   }
+
 }

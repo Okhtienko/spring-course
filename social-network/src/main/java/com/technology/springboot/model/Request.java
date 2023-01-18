@@ -16,6 +16,7 @@ import java.util.Date;
 @Entity
 @Table(name = "requests")
 public class Request {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
@@ -34,4 +35,5 @@ public class Request {
     this.senderId = senderId;
     this.recipientId = recipientId;
   }
+
 }

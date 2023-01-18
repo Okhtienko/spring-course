@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 public class AuthorizationInterceptor implements HandlerInterceptor {
+
   private final SignedInUser signedInUser;
 
   @Override
@@ -19,4 +20,5 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     response.sendRedirect("signUp");
     return false;
   }
+
 }

@@ -14,6 +14,7 @@ import java.util.Optional;
 @Slf4j
 @ControllerAdvice
 public class ExceptionMapper {
+
   @ExceptionHandler(Exception.class)
   public ModelAndView handleException(final Exception e) {
     log.error("Unexpected exception", e);
@@ -45,4 +46,5 @@ public class ExceptionMapper {
     model.setViewName("errors");
     return model;
   }
+
 }

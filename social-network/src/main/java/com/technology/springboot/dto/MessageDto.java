@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class MessageDto {
+
   @NotNull
   private String text;
 
@@ -16,4 +17,5 @@ public class MessageDto {
   @NotNull
   @NotEmpty
   private Long secondFriendId;
+
 }

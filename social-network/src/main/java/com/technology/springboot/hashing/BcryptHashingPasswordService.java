@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BcryptHashingPasswordService implements BcryptHashingPassword {
+
   private final int logRounds;
 
   public BcryptHashingPasswordService(@Value("${logRounds}") int logRounds) {
@@ -22,4 +23,5 @@ public class BcryptHashingPasswordService implements BcryptHashingPassword {
   public boolean verifyHash(String password, String hash) {
     return BCrypt.checkpw(password, hash);
   }
+
 }

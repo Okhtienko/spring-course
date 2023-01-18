@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class MessengerFacade {
+
   private final SignedInUser signedInUser;
   private final MessengerService messageService;
 
@@ -36,4 +37,5 @@ public class MessengerFacade {
     messageService.deleteMessages(senderId, recipientId);
     log.info("Delete messages from db. SenderId[{}]. RecipientId[{}]", senderId, recipientId);
   }
+
 }

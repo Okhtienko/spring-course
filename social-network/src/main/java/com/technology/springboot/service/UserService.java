@@ -5,13 +5,15 @@ import com.technology.springboot.hashing.BcryptHashingPassword;
 import com.technology.springboot.model.User;
 import com.technology.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
   private final UserRepository userRepository;
   private final BcryptHashingPassword hashingPassword;
 
@@ -33,11 +35,12 @@ public class UserService {
     return userRepository.findUserById(signedInUserId).orElse(null);
   }
 
-  public List<User> getSuggestedFriendsList(final Long signedInUserId) {
-    return userRepository.findSuggestedFriendsByIdNot(signedInUserId);
+  public Page<User> getSuggestedFriendsList(final Long signedInUserId, final int page, final int  size) {
+    return userRepository.findSuggestedFriendsByIdNot(signedInUserId, PageRequest.of(page, size));
   }
 
   public boolean isExists(final String name) {
     return userRepository.existsUserByName(name);
   }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthenticationFacade {
+
   private final UserService userService;
   private final SignedInUser signedInUser;
 
@@ -22,10 +23,16 @@ public class AuthenticationFacade {
     userService.addUser(name, password);
     log.info("User does not exist, registering a new user. User[{}]", name);
 
+    final Long signedInUserId = userService.getUserByName(name).getId();
+    signedInUser.setId(signedInUserId);
+    signedInUser.setName(userDto.getName());
+
     return true;
+
   }
 
   public boolean checkUserVerification(final UserDto userDto) throws InvalidCredentialException {
+
     final String name = userDto.getName();
     final String password = userDto.getPassword();
 
@@ -40,4 +47,5 @@ public class AuthenticationFacade {
       return false;
     }
   }
+
 }

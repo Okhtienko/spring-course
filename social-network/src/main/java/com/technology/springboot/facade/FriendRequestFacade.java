@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class FriendRequestFacade {
+
   private final FriendRequestsService friendRequestsService;
   private final SignedInUser signedInUser;
 
@@ -55,4 +56,5 @@ public class FriendRequestFacade {
     );
     return incomingRequestsList;
   }
+
 }

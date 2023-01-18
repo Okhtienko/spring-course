@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class FriendRequestController {
+
   private final FriendRequestFacade friendRequestFacade;
 
   @PostMapping(path = "/creatingFriendRequests", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -48,4 +49,5 @@ public class FriendRequestController {
     friendRequestFacade.deleteIncomingRequest(requestFriendId);
     return "redirect:incomingRequests";
   }
+
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface MessengerRepository extends JpaRepository<Message, Long> {
+
   @Query("select m from Message m where  m.firstFriendId = :senderId and m.secondFriendId = :recipientId " +
       "or m.secondFriendId = :senderId and m.firstFriendId = :recipientId")
   List<Message> getMessages(@Param("senderId") Long senderId, @Param("recipientId") Long recipientId);
@@ -19,4 +20,5 @@ public interface MessengerRepository extends JpaRepository<Message, Long> {
   @Query("delete from Message m where m.firstFriendId = :senderId and m.secondFriendId = :recipientId " +
       "or m.secondFriendId = :senderId and m.firstFriendId = :recipientId")
   void deleteMessages(@Param("senderId") Long senderId, @Param("recipientId") Long recipientId);
+
 }

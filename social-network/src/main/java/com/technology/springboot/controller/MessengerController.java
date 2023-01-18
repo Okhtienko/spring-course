@@ -6,7 +6,7 @@ import com.technology.springboot.model.Message;
 import com.technology.springboot.model.User;
 import com.technology.springboot.service.UserService;
 import com.technology.springboot.session.SignedInUser;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MessengerController {
+
   private final MessengerFacade messageFacade;
   private final UserService userService;
   private final SignedInUser signedInUser;
@@ -42,9 +43,10 @@ public class MessengerController {
     return "redirect:messenger?friendId=" + friendId;
   }
 
-  @PostMapping(path = "/clear")
+  @PostMapping(path = "/clear", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public String clearHistoryMessages(@RequestParam final Long friendId) {
     messageFacade.deleteMessages(friendId);
     return "redirect:messenger?friendId=" + friendId;
   }
+
 }

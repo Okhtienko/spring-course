@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 
 @Data
 public class UserDto {
+
   @NotNull(groups = {Unique.class, Credentials.class})
   @NotEmpty(groups = {Unique.class, Credentials.class}, message = "Name cannot be empty.")
   @Size(
@@ -31,4 +32,5 @@ public class UserDto {
       message = "Password must be between 6 and 15 characters."
   )
   private String password;
+
 }

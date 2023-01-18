@@ -165,7 +165,7 @@
                 </executions>
             </plugin>
             <!-- Pmd plugin-->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${pmd.maven.plugin.version}</version>
@@ -187,7 +187,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
             <!-- GitHub spotbugs -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>

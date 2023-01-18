@@ -8,6 +8,7 @@ import com.technology.springboot.service.UserService;
 import com.technology.springboot.session.SignedInUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class FriendFacade {
+
   private final FriendService friendService;
   private final FriendRequestsService friendRequestsService;
   private final UserService userService;
@@ -48,12 +50,13 @@ public class FriendFacade {
     log.info("Delete messages. FriendId[{}]", recipientId);
   }
 
-  public List<User> viewSuggestedFriends() {
+  public Page<User> viewSuggestedFriends(final int page, final int  size) {
     final Long signedInUserId = signedInUser.getId();
-    final List<User> suggestedFriends = userService.getSuggestedFriendsList(signedInUserId);
+    final Page<User> suggestedFriends = userService.getSuggestedFriendsList(signedInUserId, page, size);
     log.info("Displays a number of suggested friends. Number of suggested friends[{}]",
-        suggestedFriends.size()
+        suggestedFriends.getTotalElements()
     );
     return suggestedFriends;
   }
+
 }

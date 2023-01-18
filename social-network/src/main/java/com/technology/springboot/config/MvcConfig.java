@@ -12,6 +12,7 @@ import org.springframework.web.servlet.handler.MappedInterceptor;
 @Configuration
 @RequiredArgsConstructor
 public class MvcConfig implements WebMvcConfigurer {
+
   private final SignedInUser signedInUser;
 
   @Override
@@ -23,7 +24,7 @@ public class MvcConfig implements WebMvcConfigurer {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(
         new MappedInterceptor(
-            new String[] {
+            new String[]{
               "/friends",
               "/outgoingRequests",
               "/incomingRequests",
@@ -34,4 +35,5 @@ public class MvcConfig implements WebMvcConfigurer {
         )
     );
   }
+
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public interface FriendRequestsRepository extends JpaRepository<Request, Long> {
+
   @Modifying
   void deleteFriendRequestBySenderIdAndRecipientId(Long senderId, Long recipientId);
 
@@ -22,4 +23,5 @@ public interface FriendRequestsRepository extends JpaRepository<Request, Long> {
 
   @Query("select u from User u inner join Request r on u.id = r.recipientId where r.senderId = :senderId")
   List<User> getOutgoingRequests(@Param("senderId") Long senderId);
+
 }

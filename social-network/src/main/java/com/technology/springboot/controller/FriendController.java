@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class FriendController {
+
   private final FriendFacade friendFacade;
 
   @GetMapping(path = "/friends")
@@ -35,4 +36,5 @@ public class FriendController {
     friendFacade.deleteFriend(requestFriendId);
     return "redirect:friends";
   }
+
 }

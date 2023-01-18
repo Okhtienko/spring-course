@@ -16,6 +16,7 @@ import java.util.Date;
 @Entity
 @Table(name = "friends")
 public class Friend {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
@@ -34,4 +35,5 @@ public class Friend {
     this.firstFriendId = firstFriendId;
     this.secondFriendId = secondFriendId;
   }
+
 }
