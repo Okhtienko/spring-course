@@ -1,4 +1,4 @@
-package com.technology.springboot.controller;
+package com.technology.springboot.controllers;
 
 import com.technology.springboot.facade.FriendFacade;
 import com.technology.springboot.model.User;
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/view")
 public class FriendController {
 
   private final FriendFacade friendFacade;

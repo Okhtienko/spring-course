@@ -1,4 +1,4 @@
-package com.technology.springboot.config;
+package com.technology.springboot.config.session;
 
 import com.technology.springboot.session.SignedInUser;
 import lombok.RequiredArgsConstructor;

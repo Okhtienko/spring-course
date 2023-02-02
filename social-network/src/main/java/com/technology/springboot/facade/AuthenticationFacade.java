@@ -1,7 +1,6 @@
 package com.technology.springboot.facade;
 
-import com.technology.springboot.dto.UserDto;
-import com.technology.springboot.exception.InvalidCredentialException;
+import com.technology.springboot.dto.AuthorizationUserDto;
 import com.technology.springboot.service.UserService;
 import com.technology.springboot.session.SignedInUser;
 import lombok.RequiredArgsConstructor;
@@ -16,30 +15,28 @@ public class AuthenticationFacade {
   private final UserService userService;
   private final SignedInUser signedInUser;
 
-  public boolean addUser(final UserDto userDto) {
-    final String name = userDto.getName();
-    final String password = userDto.getPassword();
+  public boolean addUser(final AuthorizationUserDto authorizationUserDto) {
+    final String name = authorizationUserDto.getName();
+    final String password = authorizationUserDto.getPassword();
 
     userService.addUser(name, password);
     log.info("User does not exist, registering a new user. User[{}]", name);
 
     final Long signedInUserId = userService.getUserByName(name).getId();
     signedInUser.setId(signedInUserId);
-    signedInUser.setName(userDto.getName());
+    signedInUser.setName(authorizationUserDto.getName());
 
     return true;
-
   }
 
-  public boolean checkUserVerification(final UserDto userDto) throws InvalidCredentialException {
+  public boolean checkUserVerification(final AuthorizationUserDto authorizationUserDto) {
+    final String name = authorizationUserDto.getName();
+    final String password = authorizationUserDto.getPassword();
 
-    final String name = userDto.getName();
-    final String password = userDto.getPassword();
-
-    if (userService.validate(name, password)) {
+    if (userService.isValidate(name, password)) {
       final Long signedInUserId = userService.getUserByName(name).getId();
       signedInUser.setId(signedInUserId);
-      signedInUser.setName(userDto.getName());
+      signedInUser.setName(authorizationUserDto.getName());
       log.info("User logged in successfully. User[{}]", name);
       return true;
     } else {

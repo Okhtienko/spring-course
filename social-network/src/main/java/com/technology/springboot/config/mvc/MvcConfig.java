@@ -1,4 +1,4 @@
-package com.technology.springboot.config;
+package com.technology.springboot.config.mvc;
 
 import com.technology.springboot.interceptor.AuthorizationInterceptor;
 import com.technology.springboot.session.SignedInUser;
@@ -17,7 +17,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/signUp").setViewName("signUp");
+    registry.addViewController("/view/signUp").setViewName("signUp");
   }
 
   @Override
@@ -25,11 +25,11 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addInterceptor(
         new MappedInterceptor(
             new String[]{
-              "/friends",
-              "/outgoingRequests",
-              "/incomingRequests",
-              "/suggestedFriends",
-              "/messenger"
+              "/view/friends",
+              "/view/outgoingRequests",
+              "/view/incomingRequests",
+              "/view/suggestedFriends",
+              "/view/messenger"
             },
             new AuthorizationInterceptor(signedInUser)
         )

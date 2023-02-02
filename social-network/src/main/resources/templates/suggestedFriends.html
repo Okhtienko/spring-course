@@ -46,7 +46,7 @@
                                         <span class="mode mode_on">Active</span>
                                     </td>
                                     <td>
-                                        <form action="#" th:action="@{/creatingFriendRequests(requestFriendId=${friend.getId()})}" method="post">
+                                        <form action="#" th:action="@{/view/creatingFriendRequests(requestFriendId=${friend.getId()})}" method="post">
                                             <button type="submit" class="mode mode_on">Add Friend</button>
                                         </form>
                                     </td>
@@ -62,7 +62,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 Rows per page
-                                <form action="#" th:action="@{/suggestedFriends}" method="post" class="form-pagination">
+                                <form action="#" th:action="@{/view/suggestedFriends}" method="get" class="form-pagination">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -80,7 +80,7 @@
                                 [[${currentPage + 1}]]-[[${items}]] of [[${pages}]]
                                 <ul class="pagination">
                                     <li class="page-item">
-                                        <a class="page-link" th:if="${currentPage > 0}" th:href="@{/suggestedFriends?page=0}">
+                                        <a class="page-link" th:if="${currentPage > 0}" th:href="@{/view/suggestedFriends?page=0}">
                                             <i class="bi bi-chevron-bar-left"></i>
                                         </a>
                                         <span th:unless="${currentPage > 0}">
@@ -88,13 +88,13 @@
                                         </span>
                                     </li>
                                     <li class="page-item">
-                                        <a th:if="${currentPage > 0}" th:href="@{'/suggestedFriends?page=' + ${currentPage - 1}}">
+                                        <a th:if="${currentPage > 0}" th:href="@{'/view/suggestedFriends?page=' + ${currentPage - 1}}">
                                             <i class="bi bi-chevron-left"></i>
                                         </a>
                                         <span th:unless="${currentPage > 0}"><i class="bi bi-chevron-left"></i></span>
                                     </li>
                                     <li class="page-item">
-                                        <a th:if="${currentPage < pages - 1}" th:href="@{'/suggestedFriends?page=' + ${currentPage + 1}}">
+                                        <a th:if="${currentPage < pages - 1}" th:href="@{'/view/suggestedFriends?page=' + ${currentPage + 1}}">
                                             <i class="bi bi-chevron-right"></i>
                                         </a>
                                         <span th:unless="${currentPage < pages - 1}">
@@ -102,7 +102,7 @@
                                         </span>
                                     </li>
                                     <li class="page-item">
-                                        <a th:if="${currentPage < pages - 1}" th:href="@{'/suggestedFriends?page=' + ${pages - 1}}">
+                                        <a th:if="${currentPage < pages - 1}" th:href="@{'/view/suggestedFriends?page=' + ${pages - 1}}">
                                             <i class="bi bi-chevron-bar-right"></i>
                                         </a>
                                         <span th:unless="${currentPage < pages - 1}">

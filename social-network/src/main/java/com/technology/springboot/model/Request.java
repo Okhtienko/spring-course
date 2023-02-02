@@ -1,8 +1,9 @@
 package com.technology.springboot.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "requests")
 public class Request {
@@ -30,10 +33,5 @@ public class Request {
 
   @Column(name = "date", insertable = false)
   private Date date;
-
-  public Request(Long senderId, Long recipientId) {
-    this.senderId = senderId;
-    this.recipientId = recipientId;
-  }
 
 }

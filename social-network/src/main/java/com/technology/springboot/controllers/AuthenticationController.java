@@ -1,7 +1,6 @@
-package com.technology.springboot.controller;
+package com.technology.springboot.controllers;
 
-import com.technology.springboot.dto.UserDto;
-import com.technology.springboot.exception.InvalidCredentialException;
+import com.technology.springboot.dto.AuthorizationUserDto;
 import com.technology.springboot.facade.AuthenticationFacade;
 import com.technology.springboot.validations.Credentials;
 import com.technology.springboot.validations.Unique;
@@ -13,8 +12,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/view")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -22,20 +23,23 @@ public class AuthenticationController {
 
   @GetMapping(path = "/signUp")
   public String viewSignUpPage(final Model model) {
-    model.addAttribute("userDto", new UserDto());
+    model.addAttribute("authorizationUserDto", new AuthorizationUserDto());
     return "signUp";
   }
 
   @PostMapping(path = "/signUp", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String signUp(@Validated(Unique.class)  @ModelAttribute("userDto") final UserDto userDto) {
-    return authorizationFacade.addUser(userDto)
+  public String signUp(
+      @Validated(Unique.class) @ModelAttribute("authorizationUserDto") final AuthorizationUserDto authorizationUserDto
+  ) {
+
+    return authorizationFacade.addUser(authorizationUserDto)
         ? "redirect:suggestedFriends"
         : "redirect:signUp";
   }
 
   @PostMapping(path = "/signIn", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String signIn(@Validated(Credentials.class) final UserDto userDto) throws InvalidCredentialException {
-    return authorizationFacade.checkUserVerification(userDto)
+  public String signIn(@Validated(Credentials.class) final AuthorizationUserDto authorizationUserDto) {
+    return authorizationFacade.checkUserVerification(authorizationUserDto)
         ? "redirect:suggestedFriends"
         : "redirect:signUp";
   }

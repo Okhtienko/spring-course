@@ -1,20 +1,19 @@
-package com.technology.springboot.controller;
+package com.technology.springboot.controllers;
 
 import com.technology.springboot.facade.FriendFacade;
 import com.technology.springboot.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/view")
 public class SuggestedFriendsController {
 
   private final FriendFacade friendFacade;
@@ -37,11 +36,6 @@ public class SuggestedFriendsController {
     model.addAttribute("suggestedFriends", suggestedFriends);
 
     return "suggestedFriends";
-  }
-
-  @PostMapping(path = "/suggestedFriends", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String getSize(@RequestParam final int size) {
-    return "redirect:suggestedFriends?size=" + size;
   }
 
 }

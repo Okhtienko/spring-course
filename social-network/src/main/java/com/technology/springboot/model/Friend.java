@@ -1,8 +1,9 @@
 package com.technology.springboot.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "friends")
 public class Friend {
@@ -30,10 +33,5 @@ public class Friend {
 
   @Column(name = "date", insertable = false)
   private Date date;
-
-  public Friend(Long firstFriendId, Long secondFriendId) {
-    this.firstFriendId = firstFriendId;
-    this.secondFriendId = secondFriendId;
-  }
 
 }

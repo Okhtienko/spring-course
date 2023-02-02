@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
@@ -22,7 +21,6 @@ public class FriendFacade {
   private final FriendRequestsService friendRequestsService;
   private final UserService userService;
   private final SignedInUser signedInUser;
-
   private final MessengerService messengerService;
 
   public void addFriend(final Long recipientId) {

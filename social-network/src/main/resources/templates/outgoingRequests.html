@@ -45,7 +45,7 @@
                     <span class="mode mode_on">Active</span>
                   </td>
                   <td>
-                    <form action="#" th:action="@{/outgoingRequests(requestFriendId=${user.getId()})}" method="post">
+                    <form action="#" th:action="@{/view/outgoingRequests(requestFriendId=${user.getId()})}" method="post">
                       <button type="submit" class="mode mode_off">Delete request</button>
                     </form>
                   </td>

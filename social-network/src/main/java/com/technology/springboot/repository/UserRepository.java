@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   Page<User> findSuggestedFriendsByIdNot(Long signedInUserId, Pageable pageable);
 
+  Page<User> findSuggestedFriendsByNameNot(String name, Pageable pageable);
+
   boolean existsUserByName(String name);
 
 }

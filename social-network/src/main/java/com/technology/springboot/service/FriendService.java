@@ -6,7 +6,6 @@ import com.technology.springboot.repository.FriendRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -16,7 +15,7 @@ public class FriendService {
   private final FriendRepository friendRepository;
 
   public void addFriend(final Long senderId, final Long recipientId) {
-    final Friend friend = new Friend(senderId, recipientId);
+    final Friend friend = Friend.builder().secondFriendId(senderId).firstFriendId(recipientId).build();
     friendRepository.save(friend);
   }
 

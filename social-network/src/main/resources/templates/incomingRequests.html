@@ -46,12 +46,12 @@
                                         <span class="mode mode_on">Active</span>
                                     </td>
                                     <td>
-                                        <form action="#" th:action="@{/acceptingRequests(requestFriendId=${user.getId()})}" method="post">
+                                        <form action="#" th:action="@{/view/acceptingRequests(requestFriendId=${user.getId()})}" method="post">
                                             <button class="mode mode_on" type="submit">Accept request</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="#" th:action="@{/incomingRequests(requestFriendId=${user.getId()})}" method="post">
+                                        <form action="#" th:action="@{/view/incomingRequests(requestFriendId=${user.getId()})}" method="post">
                                             <button class="mode mode_off" type="submit">Reject request</button>
                                         </form>
                                     </td>

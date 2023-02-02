@@ -6,6 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @AllArgsConstructor
+@SuppressWarnings("PMD")
 public class NameUniqueValidator implements ConstraintValidator<NameUnique, String> {
 
   private final UserService userService;
