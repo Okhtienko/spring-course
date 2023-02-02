@@ -11,7 +11,7 @@
     <body>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#" th:action="@{/signUp}" th:object="${userDto}" method="post">
+                <form action="#" th:action="@{/view/signUp}" th:object="${authorizationUserDto}" method="post">
                     <h1>Create Account</h1>
                     <input type="text" th:field="*{name}" name="name" placeholder="Name"/>
                     <input type="password" th:field="*{password}" placeholder="Password" name="password"/>
@@ -19,7 +19,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="#" th:action="@{/signIn}" th:object="${userDto}" method="post">
+                <form action="#" th:action="@{/view/signIn}" th:object="${authorizationUserDto}" method="post">
                     <h1>Sign in</h1>
                     <input type="text" th:field="*{name}" placeholder="Name" name="name" />
                     <input type="password" th:field="*{password}" placeholder="Password" name="password" />

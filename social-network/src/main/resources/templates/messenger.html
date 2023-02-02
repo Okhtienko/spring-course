@@ -43,7 +43,7 @@
                                     </div>
                             </div>
                         </li>
-                        <form action="#" th:object="${friend}" th:action="@{/messages(friendId=${friendId})}" method="post" >
+                        <form action="#" th:object="${friend}" th:action="@{/view/messages(friendId=${friendId})}" method="post" >
                             <li class="mb-3">
                                 <div class="form-outline form-white">
                                     <input type="hidden" name="friendName" th:value="${friend.name}">
@@ -53,7 +53,7 @@
                             </li>
                             <button class="mode mode_on">Send Message</button>
                         </form>
-                        <form action="#" th:action="@{/clear(friendId=${friendId})}" method="post">
+                        <form action="#" th:action="@{/view/clear(friendId=${friendId})}" method="post">
                             <button type="submit" class="mode mode_off">Clear message history</button>
                         </form>
                     </ul>

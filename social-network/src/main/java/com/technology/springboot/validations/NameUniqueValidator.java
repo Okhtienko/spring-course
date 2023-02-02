@@ -6,11 +6,14 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @AllArgsConstructor
+@SuppressWarnings("PMD")
 public class NameUniqueValidator implements ConstraintValidator<NameUnique, String> {
+
   private final UserService userService;
 
   @Override
   public boolean isValid(String nameField, ConstraintValidatorContext constraintValidatorContext) {
     return !userService.isExists(nameField);
   }
+
 }

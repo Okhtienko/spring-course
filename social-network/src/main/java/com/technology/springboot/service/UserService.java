@@ -1,28 +1,34 @@
 package com.technology.springboot.service;
 
-import com.technology.springboot.exception.InvalidCredentialException;
-import com.technology.springboot.hashing.BcryptHashingPassword;
+import com.technology.springboot.config.security.PasswordConfig;
 import com.technology.springboot.model.User;
 import com.technology.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-  private final UserRepository userRepository;
-  private final BcryptHashingPassword hashingPassword;
 
-  public void addUser(final String name, final String password) {
-    final User user = new User(name, hashingPassword.generateHash(password));
-    userRepository.save(user);
+  private final UserRepository userRepository;
+  private final PasswordConfig passwordConfig;
+
+  public User addUser(final String name, final String password) {
+    final User user = User
+        .builder()
+        .name(name)
+        .password(passwordConfig.passwordEncoder().encode(password))
+        .build();
+    return userRepository.save(user);
   }
 
-  public boolean validate(final String name, final String password) throws InvalidCredentialException {
+  public boolean isValidate(final String name, final String password) {
     final User user = userRepository.findUserByName(name).orElse(null);
-    return user != null && hashingPassword.verifyHash(password, user.getPassword());
+    return user != null && passwordConfig.passwordEncoder().matches(password, user.getPassword());
   }
 
   public User getUserByName(final String name) {
@@ -33,11 +39,18 @@ public class UserService {
     return userRepository.findUserById(signedInUserId).orElse(null);
   }
 
-  public List<User> getSuggestedFriendsList(final Long signedInUserId) {
-    return userRepository.findSuggestedFriendsByIdNot(signedInUserId);
+  public Page<User> getSuggestedFriendsList(final Long signedInUserId, final int page, final int  size) {
+    return userRepository.findSuggestedFriendsByIdNot(signedInUserId, PageRequest.of(page, size));
+  }
+
+  public Page<User> getSuggestedFriendsList(final int page, final int  size) {
+    final UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    final String name = userDetails.getUsername();
+    return userRepository.findSuggestedFriendsByNameNot(name, PageRequest.of(page, size));
   }
 
   public boolean isExists(final String name) {
     return userRepository.existsUserByName(name);
   }
+
 }

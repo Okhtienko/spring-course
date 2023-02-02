@@ -6,16 +6,20 @@ import com.technology.springboot.repository.FriendRequestsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class FriendRequestsService {
+
   private final FriendRequestsRepository friendRequestsRepository;
 
   public void addFriendRequest(final Long senderId, final Long recipientId) {
-    final Request friendRequest = new Request(senderId, recipientId);
+    final Request friendRequest = Request
+        .builder()
+        .senderId(senderId)
+        .recipientId(recipientId)
+        .build();
     friendRequestsRepository.save(friendRequest);
   }
 
@@ -35,4 +39,5 @@ public class FriendRequestsService {
   public List<User> getOutgoingFriendRequests(final Long senderId) {
     return friendRequestsRepository.getOutgoingRequests(senderId);
   }
+
 }

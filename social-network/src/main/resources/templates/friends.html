@@ -46,12 +46,12 @@
                                         <span class="mode mode_on">Active</span>
                                     </td>
                                     <td>
-                                        <form action="#" th:action="@{/friends(requestFriendId=${friend.getId()})}" method="post">
+                                        <form action="#" th:action="@{/view/friends(requestFriendId=${friend.getId()})}" method="post">
                                             <button class="mode mode_off" type="submit">Delete friend</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="#" th:action="@{/messenger}" method="get">
+                                        <form action="#" th:action="@{/view/messenger}" method="get">
                                             <input type="hidden" name="friendId" th:value="${friend.id}">
                                             <input type="hidden" name="friendName" th:value="${friend.name}">
                                             <button class="mode mode_on" type="submit">Send message</button>

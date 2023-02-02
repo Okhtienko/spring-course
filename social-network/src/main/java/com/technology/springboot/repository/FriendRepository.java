@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long> {
+
   @Modifying
   @Query("delete from Friend f where f.firstFriendId = :signedInUserId and f.secondFriendId = :friendId " +
       "or f.secondFriendId = :signedInUserId and f.firstFriendId = :friendId")
@@ -25,4 +25,5 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
       "where f2.secondFriendId = :signedInUserId)"
   )
   List<User> getFriends(@Param("signedInUserId") Long signedInUserId);
+
 }
